@@ -3,6 +3,7 @@ import{createDrawerNavigator,createStackNavigator,createAppContainer} from'react
 
 import TelaPrincipal from './src/screens/telePrincipal';
 import minhaConta from './src/screens/minhaConta';
+import pagar from './src/screens/pagar';
 
 const AppNavigator = createDrawerNavigator({
   Tela1:{
@@ -10,6 +11,9 @@ const AppNavigator = createDrawerNavigator({
   },
   Tela2:{
     screen:minhaConta
+  },
+  Tela3:{
+    screen:pagar
   }
 });
 
