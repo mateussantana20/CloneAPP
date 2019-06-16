@@ -1,11 +1,30 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View,TouchableHighlight,Image,StatusBar,FlatList} from 'react-native';
+import {StyleSheet, Text, View,TouchableHighlight,Image,FlatList,Animated} from 'react-native';
 
 import arrow from '../images/Icon/arrow.png'
+import arrow2 from '../images/Icon/arrow2.png'
 import dinheiro from '../images/Icon/dinheiro-40.png'
 import cartoes from '../images/Icon/cartoes.png'
 import menu from '../images/Icon/menu.png'
+
 export default class TelaPrincipal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flexx: new Animated.Value(1),
+    };
+    this.fechar = this.fechar.bind(this);
+  }
+  fechar() {
+
+    Animated.timing(
+      this.state.flexx,
+      {
+        toValue:0,
+        duration:1000
+      }
+    ).start();
+  }
 
   static navigationOptions = {
     drawerLabel:'Página Inicial',
@@ -16,23 +35,26 @@ export default class TelaPrincipal extends Component {
   render() {
     return (
       <View style = {styles.ViewPrincipal}>
-        <StatusBar hidden={true}/>
-        <View style={styles.View1}>
+        <Animated.View style={{backgroundColor:'#87CEFA',height:140,flex:this.state.flexx,borderRadius:30}}>
         <View style={{marginTop:30}}>
-          <TouchableHighlight onPress={() => this.props.navigation.toggleDrawer()}  >
-            <View style = {{marginLeft:10,marginTop:5}}>
-              <Image style={styles.ImgMenu} source={menu}/>
+
+            <TouchableHighlight onPress={() => this.props.navigation.toggleDrawer()}  >
+              <View style = {{marginLeft:10,marginTop:5}}>
+                <Image style={styles.ImgMenu} source={menu}/>
+              </View>
+            </TouchableHighlight>
+
+            <Text style = {styles.Texts}>Olá  Mateus</Text>
+            <Text style = {styles.Texts}>R$ 100</Text>
+            <View style ={{justifyContent:'center',alignItems:'center',marginTop:45}}> 
+
             </View>
-          </TouchableHighlight>
-          <Text style = {styles.Texts}>Olá  Mateus</Text>
-          <Text style = {styles.Texts}>R$ 100</Text>
-          <View style ={{justifyContent:'center',alignItems:'center',marginTop:90}}> 
-          <Image source={arrow} style = {{width:30,height:30}}/>
+
           </View>
-        </View>
-        </View>
+        </Animated.View>
 
         <View style = {styles.View3}>
+          <View style = {{justifyContent:'space-around',flexDirection: 'row'}}>
           <TouchableHighlight>
             <View>
               <Image style={styles.Imgs} source={dinheiro}/>
@@ -46,10 +68,18 @@ export default class TelaPrincipal extends Component {
               <Text style = {{marginTop:0}}>Cartões</Text>
             </View>
           </TouchableHighlight>
+          </View>
+
+              <View style ={{alignContent:'center',marginTop:-120,marginLeft:165}}>
+              <TouchableHighlight onPress={this.fechar}>
+                <Image source={arrow2} style = {{width:30,height:30}}/>
+              </TouchableHighlight>
+              </View>
 
         </View>
 
       </View>
+      
     );
   }
 }
@@ -57,13 +87,6 @@ export default class TelaPrincipal extends Component {
 const styles = StyleSheet.create({
   ViewPrincipal:{
     flex:1,
-    marginTop:0
-  },
-  View1:{
-    backgroundColor:'#87CEFA',
-    flex:1, 
-    height: 160,
-    borderRadius:40
   },
   ImgMenu:{
     width:30,
@@ -78,8 +101,7 @@ const styles = StyleSheet.create({
   },
   View3:{
     flex:2,
-    justifyContent:'space-around',
-    flexDirection: 'row',
+
     alignItems: 'stretch',
     marginTop:10
   },
