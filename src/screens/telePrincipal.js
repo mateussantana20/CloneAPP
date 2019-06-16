@@ -1,31 +1,41 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View,TouchableHighlight,Image,FlatList} from 'react-native';
+import {StyleSheet, Text, View,TouchableHighlight,Image,StatusBar,FlatList} from 'react-native';
 
 import arrow from '../images/Icon/arrow.png'
 import dinheiro from '../images/Icon/dinheiro-40.png'
 import cartoes from '../images/Icon/cartoes.png'
-
+import menu from '../images/Icon/menu.png'
 export default class TelaPrincipal extends Component {
 
   static navigationOptions = {
-    title:'Home'
+    drawerLabel:'Página Inicial',
+    drawerIcon:() => (
+      <Image source={require('../images/Icon/home.png')} style={styles.icon} />
+    )
   }
   render() {
     return (
       <View style = {styles.ViewPrincipal}>
-
-        <View style={styles.View1}> 
+        <StatusBar hidden={true}/>
+        <View style={styles.View1}>
+        <View style={{marginTop:30}}>
+          <TouchableHighlight onPress={() => this.props.navigation.toggleDrawer()}  >
+            <View style = {{marginLeft:10,marginTop:5}}>
+              <Image style={styles.ImgMenu} source={menu}/>
+            </View>
+          </TouchableHighlight>
           <Text style = {styles.Texts}>Olá  Mateus</Text>
           <Text style = {styles.Texts}>R$ 100</Text>
           <View style ={{justifyContent:'center',alignItems:'center',marginTop:90}}> 
           <Image source={arrow} style = {{width:30,height:30}}/>
           </View>
         </View>
+        </View>
 
         <View style = {styles.View3}>
           <TouchableHighlight>
             <View>
-              <Image tyle={styles.Imgs} source={dinheiro}/>
+              <Image style={styles.Imgs} source={dinheiro}/>
               <Text style = {styles.texImg}>Adicionar Dinherio</Text>
             </View>
           </TouchableHighlight>
@@ -47,14 +57,18 @@ export default class TelaPrincipal extends Component {
 const styles = StyleSheet.create({
   ViewPrincipal:{
     flex:1,
-    marginTop:30
+    marginTop:0
   },
   View1:{
     backgroundColor:'#87CEFA',
     flex:1, 
-    height: 150,
-    borderRadius:3
+    height: 160,
+    borderRadius:40
   },
+  ImgMenu:{
+    width:30,
+    height:30
+  }, 
   Texts:{
     fontSize:20,
     textAlign:'auto',
@@ -76,6 +90,10 @@ const styles = StyleSheet.create({
   texImg:{
     marginTop:10,
     textAlign:'center'
+  },
+  icon:{
+    width:26,
+    height:26
   }
 })
 
