@@ -58,7 +58,7 @@ export default class TelaPrincipal extends Component {
           <TouchableHighlight>
             <View>
               <Image style={styles.Imgs} source={dinheiro}/>
-              <Text style = {styles.texImg}>Adicionar Dinherio</Text>
+              <Text style = {styles.texImg}>Adicionar Dinheiro</Text>
             </View>
           </TouchableHighlight>
 
